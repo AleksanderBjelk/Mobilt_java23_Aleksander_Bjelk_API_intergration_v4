@@ -18,6 +18,8 @@ class Menu : AppCompatActivity() {
         val menuClick = findViewById<ImageButton>(R.id.menuButton)
         val credentialsMenuClick = findViewById<Button>(R.id.formMenuButton)
         val registerMenuClick = findViewById<Button>(R.id.registerMenuButton)
+        val gameAPIMenuClick = findViewById<Button>(R.id.gameAPIMenuButton)
+        val movieAPIMenuClick = findViewById<Button>(R.id.movieAPIMenuButton)
         val logOutMenuClick = findViewById<Button>(R.id.logOutMenuButton)
 
         //En meny med knappar för att byta till andra sidor
@@ -33,6 +35,16 @@ class Menu : AppCompatActivity() {
 
         registerMenuClick.setOnClickListener {
             val intent = Intent(this, Register::class.java)
+            startActivity(intent)
+        }
+
+        gameAPIMenuClick.setOnClickListener {
+            val intent = Intent(this, game_API::class.java)
+            startActivity(intent)
+        }
+
+        movieAPIMenuClick.setOnClickListener {
+            val intent = Intent(this, TMDB_API::class.java)
             startActivity(intent)
         }
 

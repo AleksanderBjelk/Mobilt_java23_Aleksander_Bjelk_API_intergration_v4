@@ -34,7 +34,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/formMenuButton"
@@ -48,20 +48,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.697" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/registerMenuButton"
-        android:layout_width="185dp"
-        android:layout_height="100dp"
+        android:layout_width="186dp"
+        android:layout_height="95dp"
         android:backgroundTint="#000000"
         android:text="Register"
         android:textColor="#FF8432"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.345" />
 
     <Button
         android:id="@+id/logOutMenuButton"
@@ -73,8 +75,37 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerMenuButton"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintVertical_bias="0.912" />
+
+    <Button
+        android:id="@+id/gameAPIMenuButton"
+        android:layout_width="181dp"
+        android:layout_height="94dp"
+        android:backgroundTint="#000000"
+        android:text="Game API"
+        android:textColor="#FF8432"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.549" />
+
+    <Button
+        android:id="@+id/movieAPIMenuButton"
+        android:layout_width="185dp"
+        android:layout_height="93dp"
+        android:backgroundTint="#000000"
+        android:text="Movie API"
+        android:textColor="#FF8432"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.747" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

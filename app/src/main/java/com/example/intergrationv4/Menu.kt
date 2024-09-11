@@ -8,6 +8,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.intergrationv4.MainActivity.Companion.navController
+import com.google.firebase.auth.FirebaseAuth
+
+private lateinit var auth: FirebaseAuth
 
 class Menu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +53,10 @@ class Menu : AppCompatActivity() {
         }
 
         logOutMenuClick.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            auth.signOut()
+            navController.navigate(R.id.mainActivity) {
+                popUpTo(R.id.menu) { inclusive = true }
+            }
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

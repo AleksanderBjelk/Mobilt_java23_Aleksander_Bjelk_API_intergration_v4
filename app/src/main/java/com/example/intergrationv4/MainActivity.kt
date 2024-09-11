@@ -10,11 +10,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.auth.FirebaseAuth
 
 private lateinit var auth: FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {companion object {
+    lateinit var navController: NavController
+}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,10 +26,21 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.navController
+
         val emailEditText = findViewById<EditText>(R.id.emailEditTextText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditTextText)
         val logInClick = findViewById<Button>(R.id.logInButton)
         val registerClick = findViewById<Button>(R.id.registerButton)
+
+//        findViewById<Button>(R.id.logInButton).setOnClickListener {
+//            navController.navigate(R.id.menu)  //bytar till activity 2
+//            /*navController.navigate("activity2Route") {
+//                popUpTo("activity2Route") { inclusive = false }
+//                //launchSingleTop = true
+//            }*/
+//        }
 
         //här sätter vi variablerna till email och password, vi ser till att ta bort mellanrum med trim() för att undvika oönskade uppgifter. Vi ser även till att
         //använderen skriver i något och meddelar användaren
@@ -34,7 +49,24 @@ class MainActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                signInUser(email, password)
+                    auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                val user = auth.currentUser
+                                Toast.makeText(this, "Welcome ${user?.email}", Toast.LENGTH_LONG).show()
+                                navController.navigate(R.id.menu)
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    "Authentication failed: ${task.exception?.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.d("Aleksander", "gicj inte att logga in:", e)
+                        }
+
             } else {
                 Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
             }
@@ -46,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -55,25 +88,24 @@ class MainActivity : AppCompatActivity() {
 
     //här autentiserar vi om använderaren finns, gör den det så loggas den in och byter sida till Form/Credentials. Funkar det inte kommer det ett meddelande om varför
     //det inte funkade baserat på vad programmet ger för fel.
-    private fun signInUser(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    Toast.makeText(this, "Welcome ${user?.email}", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, Form::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Authentication failed: ${task.exception?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
-            .addOnFailureListener { e ->
-                Log.d("Aleksander", "gicj inte att logga in:", e)
-            }
-    }
+//        fun signInUser(email: String, password: String) {
+//            auth.signInWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this) { task ->
+//                    if (task.isSuccessful) {
+//                        val user = auth.currentUser
+//                        Toast.makeText(this, "Welcome ${user?.email}", Toast.LENGTH_LONG).show()
+//                        navController.navigate(R.id.menu)
+//                    } else {
+//                        Toast.makeText(
+//                            this,
+//                            "Authentication failed: ${task.exception?.message}",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                }
+//                .addOnFailureListener { e ->
+//                    Log.d("Aleksander", "gicj inte att logga in:", e)
+//                }
+//        }
+
 }

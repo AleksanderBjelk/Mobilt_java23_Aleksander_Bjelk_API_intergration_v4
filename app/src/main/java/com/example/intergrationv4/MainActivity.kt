@@ -34,16 +34,8 @@ class MainActivity : AppCompatActivity() {companion object {
         val logInClick = findViewById<Button>(R.id.logInButton)
         val registerClick = findViewById<Button>(R.id.registerButton)
 
-//        findViewById<Button>(R.id.logInButton).setOnClickListener {
-//            navController.navigate(R.id.menu)  //bytar till activity 2
-//            /*navController.navigate("activity2Route") {
-//                popUpTo("activity2Route") { inclusive = false }
-//                //launchSingleTop = true
-//            }*/
-//        }
-
-        //här sätter vi variablerna till email och password, vi ser till att ta bort mellanrum med trim() för att undvika oönskade uppgifter. Vi ser även till att
-        //använderen skriver i något och meddelar användaren
+        //här autentiserar vi om använderaren finns, gör den det så loggas den in och byter sida till menu. Funkar det inte kommer det ett meddelande om varför
+        //det inte funkade baserat på vad programmet ger för fel.
         logInClick.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
@@ -85,27 +77,5 @@ class MainActivity : AppCompatActivity() {companion object {
             insets
         }
     }
-
-    //här autentiserar vi om använderaren finns, gör den det så loggas den in och byter sida till Form/Credentials. Funkar det inte kommer det ett meddelande om varför
-    //det inte funkade baserat på vad programmet ger för fel.
-//        fun signInUser(email: String, password: String) {
-//            auth.signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this) { task ->
-//                    if (task.isSuccessful) {
-//                        val user = auth.currentUser
-//                        Toast.makeText(this, "Welcome ${user?.email}", Toast.LENGTH_LONG).show()
-//                        navController.navigate(R.id.menu)
-//                    } else {
-//                        Toast.makeText(
-//                            this,
-//                            "Authentication failed: ${task.exception?.message}",
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//                    }
-//                }
-//                .addOnFailureListener { e ->
-//                    Log.d("Aleksander", "gicj inte att logga in:", e)
-//                }
-//        }
 
 }

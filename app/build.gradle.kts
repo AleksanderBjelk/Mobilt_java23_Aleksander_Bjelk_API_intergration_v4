@@ -38,6 +38,9 @@ android {
 
 dependencies {
 
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation ("com.google.code.gson:gson:2.10.1")
     implementation("com.google.firebase:firebase-auth")
     implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
     implementation("com.google.firebase:firebase-firestore")

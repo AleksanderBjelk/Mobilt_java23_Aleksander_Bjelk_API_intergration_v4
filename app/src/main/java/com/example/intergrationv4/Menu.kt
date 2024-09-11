@@ -52,6 +52,7 @@ class Menu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Här använder vi navController och popUpTo för att rensa stacken så en användare inte kan logga ut och ta sig in igen
         logOutMenuClick.setOnClickListener {
             auth.signOut()
             navController.navigate(R.id.mainActivity) {

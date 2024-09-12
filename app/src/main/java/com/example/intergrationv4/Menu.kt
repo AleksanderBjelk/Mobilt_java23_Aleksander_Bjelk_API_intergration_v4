@@ -57,8 +57,14 @@ class Menu : AppCompatActivity() {
             auth.signOut()
             navController.navigate(R.id.mainActivity) {
                 popUpTo(R.id.menu) { inclusive = true }
+        //ett annat sätt att logga ut och ta bort backstack hade varit med intent:
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        startActivity(intent)
+//        finish()
             }
         }
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
